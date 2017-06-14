@@ -1,0 +1,16 @@
+{
+  "name": "deploy-listener-server",
+  "version": "0.0.1",
+  "description": "Start an SSL listener for GitHub to listen for pushes to branches then launch an executable.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Niall Cargill <ikhnaton@us.ibm.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bunyan": "^1.8.10",
+    "githubhook": "^1.7.1",
+    "lodash": "^4.17.4"
+  }
+}
