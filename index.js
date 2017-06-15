@@ -82,7 +82,7 @@ _.forEach(config.handlers, (handler) =>
 		{
 			log.warn(
 			{
-				msg:
+				message:
 				{
 					txt: "slackUrlCheck",
 					handler: handler.slackUrl,
