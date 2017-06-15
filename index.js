@@ -5,7 +5,7 @@ const githubhook = require('githubhook');
 const slack = require("./slack");
 const config = require('./config');
 
-const log = bunyan.createLogger(
+global.log = bunyan.createLogger(
 {
 	name: "deploy-listener",
 	level: config.logLevel,

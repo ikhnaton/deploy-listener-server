@@ -4,6 +4,10 @@ const config = require('./config');
 let slack = {
 	send: function (message, color, handler)
 	{
+		log.debug("sending to slack");
+		log.debug(message);
+		log.debug(color);
+		log.debug(handler);
 		let p = new Promise((resolve, reject) =>
 		{
 			slack.sendAttachment(
@@ -20,6 +24,7 @@ let slack = {
 
 	sendAttachment: function (attachment, handler)
 	{
+		log.debug("sendAttachment");
 		if (handler == null) handler = {};
 
 		let p = new Promise((resolve, reject) =>
@@ -40,10 +45,14 @@ let slack = {
 			{
 				if (err)
 				{
+					log.error("slack failed");
+					log.error(err);
 					reject(err);
 				}
 				else
 				{
+					log.info("slack sent successfully");
+					log.info(res);
 					resolve(res);
 				}
 			});
