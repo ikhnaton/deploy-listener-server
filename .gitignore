@@ -5,3 +5,4 @@
 /node_modules/
 /certificates/key.pem
 /certificates/cert.pem
+/config.json

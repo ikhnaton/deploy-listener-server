@@ -2,15 +2,17 @@ const fs = require('fs');
 const _ = require('lodash');
 const bunyan = require('bunyan');
 const githubhook = require('githubhook');
+const slack = require("./slack");
 const config = require('./config');
 
-const log = bunyan.createLogger({
-    name: "deploy-listener",
-    level: config.logLevel,
-    streams: [
+const log = bunyan.createLogger(
+{
+	name: "deploy-listener",
+	level: config.logLevel,
+	streams: [
 		{
 			type: 'stream',
-            stream: process.stdout
+			stream: process.stdout
         },
 		{
 			type: 'rotating-file',
@@ -23,10 +25,12 @@ const log = bunyan.createLogger({
 
 // bridge to allow generic messages from githubhook to be piped to debug without modification of module.
 const loggerBridge = {
-	log: function(msg) {
+	log: function (msg)
+	{
 		log.debug(msg);
 	},
-	error: function(msg) {
+	error: function (msg)
+	{
 		log.error(msg);
 	}
 }
@@ -43,12 +47,14 @@ const loggerBridge = {
 	https: Options to pass to nodejs https server. If specified, you must follow documentation about nodejs https library (See options in https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener)
 	trustProxy: By default the x-forwarded-for header is trusted when determining the remoteAddress to log for a request. Set this to false to disable this behavior
 */
-const github = githubhook({
+const github = githubhook(
+{
 	port: config.port,
 	secret: config.secret,
 	path: config.path,
 	logger: loggerBridge,
-	https: {
+	https:
+	{
 		key: fs.readFileSync(config.sslKey),
 		cert: fs.readFileSync(config.sslCert)
 	}
@@ -58,7 +64,8 @@ github.listen();
 
 _.forEach(config.handlers, (handler) =>
 {
-	github.on(`push:${handler.repo}:refs/heads/${handler.branch}`, function (data) {
+	github.on(`push:${handler.repo}:refs/heads/${handler.branch}`, function (data)
+	{
 		log.debug(`Push to the ${handler.branch} branch: `, (new Date()).toDateString());
 
 		log.debug(`by ${data.head_commit.committer.name} (${data.head_commit.committer.email})`);
@@ -71,11 +78,51 @@ _.forEach(config.handlers, (handler) =>
 
 		var execFile = require('child_process').execFile;
 		// params: file, args, options
-		execFile(handler.executable, null, null, function(error, stdout, stderr) {
-		  // command output is in stdout
-			if (error) log.info("error: ", error);
-			if (stdout) log.info("stdout: ", stdout);
-			if (stderr) log.info("stderr: ", stderr);
+		execFile(handler.executable, null, null, function (error, stdout, stderr)
+		{
+			// command output is in stdout
+			if (error)
+			{
+				slack.send("Deploy failed! " + error)
+					.then((res) =>
+					{
+						log.debug(res);
+					})
+					.catch((err) =>
+					{
+						log.error(err);
+					});
+				log.info("error: ", error);
+			}
+
+			if (stdout)
+			{
+				slack.send(`Deploy to branch, ${handler.branch}, successful!`)
+					.then((res) =>
+					{
+						log.debug(res);
+					})
+					.catch((err) =>
+					{
+						log.error(err);
+					});
+				log.info("stdout: ", stdout);
+			}
+
+			if (stderr)
+			{
+				slack.send("Deploy failed! " + stderr)
+					.then((res) =>
+					{
+						log.debug(res);
+					})
+					.catch((err) =>
+					{
+						log.error(err);
+					});
+				log.info("error: ", error);
+			}
+
 		});
 	});
 });

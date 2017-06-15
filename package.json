@@ -9,6 +9,7 @@
   "author": "Niall Cargill <ikhnaton@us.ibm.com>",
   "license": "ISC",
   "dependencies": {
+    "@slack/client": "^3.10.0",
     "bunyan": "^1.8.10",
     "githubhook": "^1.7.1",
     "lodash": "^4.17.4"
