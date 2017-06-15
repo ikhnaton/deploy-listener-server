@@ -20,8 +20,8 @@ const log = bunyan.createLogger(
 			period: '1d',
 			count: 3
 		}
-	],
-	serializers: { message: require('./messageSerializer') }
+	]
+	//serializers: { message: require('./messageSerializer') }
 });
 
 // bridge to allow generic messages from githubhook to be piped to debug without modification of module.
@@ -81,20 +81,12 @@ _.forEach(config.handlers, (handler) =>
 		// params: file, args, options
 		execFile(handler.executable, null, null, function (error, stdout, stderr)
 		{
-			log.warn(
-			{
-				message:
-				{
-					txt: "slackUrlCheck",
-					handler: handler.slackUrl,
-					config: config.slackUrl,
-					compare: (handler.slackUrl || config.slackUrl)
-				}
-			});
+			let slacker = ((handler.slackUrl != null) || (config.slackUrl != null))?true:false;
+
 			// command output is in stdout
 			if (error)
 			{
-				if (handler.slackUrl || config.slackUrl)
+				if (slacker == true)
 				{
 					slack.send("Deploy failed! " + error)
 						.then((res) =>
@@ -125,7 +117,7 @@ _.forEach(config.handlers, (handler) =>
 
 			if (stdout)
 			{
-				if (handler.slackUrl || config.slackUrl)
+				if (slacker == true)
 				{
 					slack.send(`Deploy to branch, ${handler.branch}, successful!`)
 						.then((res) =>
@@ -156,7 +148,7 @@ _.forEach(config.handlers, (handler) =>
 
 			if (stderr)
 			{
-				if (handler.slackUrl || config.slackUrl)
+				if (slacker == true)
 				{
 					slack.send("Deploy failed! " + stderr)
 						.then((res) =>
