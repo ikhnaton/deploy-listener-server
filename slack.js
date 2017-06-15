@@ -38,22 +38,23 @@ let slack = {
 				icon_emoji: handler.emoji || config.emoji || ":hammer_and_wrench:"
 			});
 
+			log.debug({
+
+			})
 			webhook.send(
 			{
 				attachments: attachment
-			}, function (err, res)
+			}, function (err, headers, status, body)
 			{
 				if (err)
 				{
-					log.error("slack failed");
 					log.error(err);
 					reject(err);
 				}
 				else
 				{
-					log.info("slack sent successfully");
-					log.info(res);
-					resolve(res);
+					log.info(body, status, headers);
+					resolve(body);
 				}
 			});
 		});
