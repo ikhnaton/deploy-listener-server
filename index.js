@@ -20,7 +20,8 @@ const log = bunyan.createLogger(
 			period: '1d',
 			count: 3
 		}
-	]
+	],
+	serializers: { message: require('./messageSerializer') }
 });
 
 // bridge to allow generic messages from githubhook to be piped to debug without modification of module.
