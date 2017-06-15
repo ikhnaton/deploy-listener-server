@@ -83,11 +83,13 @@ _.forEach(config.handlers, (handler) =>
 		{
 			let slacker = ((handler.slackUrl != null) || (config.slackUrl != null))?true:false;
 
+			log.info("slacker: ", slacker);
 			// command output is in stdout
 			if (error)
 			{
 				if (slacker == true)
 				{
+					log.info("Slack invoked");
 					slack.send("Deploy failed! " + error)
 						.then((res) =>
 						{
@@ -119,6 +121,7 @@ _.forEach(config.handlers, (handler) =>
 			{
 				if (slacker == true)
 				{
+					log.info("Slack invoked");
 					slack.send(`Deploy to branch, ${handler.branch}, successful!`)
 						.then((res) =>
 						{
@@ -148,6 +151,7 @@ _.forEach(config.handlers, (handler) =>
 
 			if (stderr)
 			{
+				log.info("Slack invoked");
 				if (slacker == true)
 				{
 					slack.send("Deploy failed! " + stderr)
