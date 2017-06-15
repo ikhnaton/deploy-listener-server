@@ -131,11 +131,8 @@ _.forEach(config.handlers, (handler) =>
 							{
 								log.debug(
 								{
-									msg:
-									{
-										txt: "Slack message sent successfully",
-										result: res
-									}
+									txt: "Slack message sent successfully",
+									result: res
 								});
 								resolve();
 							})
@@ -143,11 +140,8 @@ _.forEach(config.handlers, (handler) =>
 							{
 								log.error(
 								{
-									msg:
-									{
-										txt: "Slack message failed to send",
-										result: err
-									}
+									txt: "Slack message failed to send",
+									result: err
 								});
 								reject();
 							});

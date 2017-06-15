@@ -39,7 +39,7 @@ let slack = {
 			});
 
 			log.debug({
-
+				attachments: attachment
 			})
 			webhook.send(
 			{
@@ -53,8 +53,19 @@ let slack = {
 				}
 				else
 				{
-					log.info(body, status, headers);
-					resolve(body);
+					if (status != 200)
+					{
+						reject(body);
+						log.error({
+							error: body,
+							status: status
+						})
+					}
+					else
+					{
+						log.debug(body, status, headers);
+						resolve(body);
+					}
 				}
 			});
 		});
