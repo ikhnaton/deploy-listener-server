@@ -88,11 +88,11 @@ _.forEach(config.handlers, (handler) =>
 					slack.send("Deploy failed! " + error)
 						.then((res) =>
 						{
-							log.debug(res);
+							log.debug({msg: { txt : "Slack message sent successfully", result: res}});
 						})
 						.catch((err) =>
 						{
-							log.error(err);
+							log.error({msg: { txt : "Slack message failed to send", result: err}});
 						});
 				}
 				log.info("error: ", error);
@@ -105,11 +105,11 @@ _.forEach(config.handlers, (handler) =>
 					slack.send(`Deploy to branch, ${handler.branch}, successful!`)
 						.then((res) =>
 						{
-							log.debug(res);
+							log.debug({msg: { txt : "Slack message sent successfully", result: res}});
 						})
 						.catch((err) =>
 						{
-							log.error(err);
+							log.error({msg: { txt : "Slack message failed to send", result: err}});
 						});
 				}
 				log.info("stdout: ", stdout);
@@ -122,11 +122,11 @@ _.forEach(config.handlers, (handler) =>
 					slack.send("Deploy failed! " + stderr)
 						.then((res) =>
 						{
-							log.debug(res);
+							log.debug({msg: { txt : "Slack message sent successfully", result: res}});
 						})
 						.catch((err) =>
 						{
-							log.error(err);
+							log.error({msg: { txt : "Slack message failed to send", result: err}});
 						});
 				}
 				log.info("error: ", error);
