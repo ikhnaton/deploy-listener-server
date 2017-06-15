@@ -83,43 +83,52 @@ _.forEach(config.handlers, (handler) =>
 			// command output is in stdout
 			if (error)
 			{
-				slack.send("Deploy failed! " + error)
-					.then((res) =>
-					{
-						log.debug(res);
-					})
-					.catch((err) =>
-					{
-						log.error(err);
-					});
+				if (handler.slackUrl || config.slackUrl)
+				{
+					slack.send("Deploy failed! " + error)
+						.then((res) =>
+						{
+							log.debug(res);
+						})
+						.catch((err) =>
+						{
+							log.error(err);
+						});
+				}
 				log.info("error: ", error);
 			}
 
 			if (stdout)
 			{
-				slack.send(`Deploy to branch, ${handler.branch}, successful!`)
-					.then((res) =>
-					{
-						log.debug(res);
-					})
-					.catch((err) =>
-					{
-						log.error(err);
-					});
+				if (handler.slackUrl || config.slackUrl)
+				{
+					slack.send(`Deploy to branch, ${handler.branch}, successful!`)
+						.then((res) =>
+						{
+							log.debug(res);
+						})
+						.catch((err) =>
+						{
+							log.error(err);
+						});
+				}
 				log.info("stdout: ", stdout);
 			}
 
 			if (stderr)
 			{
-				slack.send("Deploy failed! " + stderr)
-					.then((res) =>
-					{
-						log.debug(res);
-					})
-					.catch((err) =>
-					{
-						log.error(err);
-					});
+				if (handler.slackUrl || config.slackUrl)
+				{
+					slack.send("Deploy failed! " + stderr)
+						.then((res) =>
+						{
+							log.debug(res);
+						})
+						.catch((err) =>
+						{
+							log.error(err);
+						});
+				}
 				log.info("error: ", error);
 			}
 
