@@ -92,7 +92,7 @@ _.forEach(config.handlers, (handler) =>
 					log.info("error: ", error);
 					if (slacker == true)
 					{
-						slack.send(handler.repo,"Deploy failed! " + error)
+						slack.send(`Repository: ${handler.repo}`,"Deploy failed! " + error)
 							.then((res) =>
 							{
 								log.debug(
@@ -120,7 +120,7 @@ _.forEach(config.handlers, (handler) =>
 					log.info("stdout: ", stdout);
 					if (slacker == true)
 					{
-						slack.send(handler.repo, `Deploy to branch, ${handler.branch}, successful!`)
+						slack.send(`Repository: ${handler.repo}`, `Deploy to branch, ${handler.branch}, successful!`)
 							.then((res) =>
 							{
 								log.debug(
