@@ -92,7 +92,7 @@ _.forEach(config.handlers, (handler) =>
 					log.info("error: ", error);
 					if (slacker == true)
 					{
-						slack.send("Deploy failed! " + error)
+						slack.send(handler.repo,"Deploy failed! " + error)
 							.then((res) =>
 							{
 								log.debug(
@@ -120,7 +120,7 @@ _.forEach(config.handlers, (handler) =>
 					log.info("stdout: ", stdout);
 					if (slacker == true)
 					{
-						slack.send(`Deploy to branch, ${handler.branch}, successful!`)
+						slack.send(handler.repo, `Deploy to branch, ${handler.branch}, successful!`)
 							.then((res) =>
 							{
 								log.debug(
@@ -143,33 +143,33 @@ _.forEach(config.handlers, (handler) =>
 					else { resolve(); }
 				}
 
-				if (stderr)
-				{
-					log.info("stderr: ", stderr);
-					if (slacker == true)
-					{
-						slack.send("Deploy failed! " + stderr)
-							.then((res) =>
-							{
-								log.debug(
-								{
-									txt: "Slack message sent successfully",
-									result: res
-								});
-								resolve();
-							})
-							.catch((err) =>
-							{
-								log.error(
-								{
-									txt: "Slack message failed to send",
-									result: err
-								});
-								reject();
-							});
-					}
-					else { resolve(); }
-				}
+//				if (stderr)
+//				{
+//					log.info("stderr: ", stderr);
+//					if (slacker == true)
+//					{
+//						slack.send(handler.repo, "Deploy failed! " + stderr)
+//							.then((res) =>
+//							{
+//								log.debug(
+//								{
+//									txt: "Slack message sent successfully",
+//									result: res
+//								});
+//								resolve();
+//							})
+//							.catch((err) =>
+//							{
+//								log.error(
+//								{
+//									txt: "Slack message failed to send",
+//									result: err
+//								});
+//								reject();
+//							});
+//					}
+//					else { resolve(); }
+//				}
 
 			});
 		});

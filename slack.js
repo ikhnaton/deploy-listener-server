@@ -2,11 +2,11 @@ const IncomingWebhook = require('@slack/client').IncomingWebhook;
 const config = require('./config');
 
 let slack = {
-	send: function (message, color, handler)
+	send: function (header, message, color, handler)
 	{
 		let p = new Promise((resolve, reject) =>
 		{
-			slack.sendAttachment(
+			slack.sendAttachment(header,
 				{
 					color: color || "#00ff00",
 					text: message
@@ -18,7 +18,7 @@ let slack = {
 		return p;
 	},
 
-	sendAttachment: function (attachment, handler)
+	sendAttachment: function (header, attachment, handler)
 	{
 		if (handler == null) handler = {};
 
@@ -38,6 +38,7 @@ let slack = {
 			})
 			webhook.send(
 			{
+				text: header,
 				attachments: [].concat(attachment)
 			}, function (err, headers, status, body)
 			{
