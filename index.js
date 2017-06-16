@@ -115,7 +115,7 @@ _.forEach(config.handlers, (handler) =>
 					else { resolve(); }
 				}
 
-				if (stdout)
+				else if (stdout)
 				{
 					log.info("stdout: ", stdout);
 					if (slacker == true)
