@@ -84,15 +84,15 @@ _.forEach(config.handlers, (handler) =>
 			execFile(handler.executable, null, null, function (error, stdout, stderr)
 			{
 				let slacker = ((handler.slackUrl != null) || (config.slackUrl != null)) ? true : false;
+				log.debug({data: handler});
 
-				log.info("slacker: ", slacker);
 				// command output is in stdout
 				if (error)
 				{
 					log.info("error: ", error);
 					if (slacker == true)
 					{
-						slack.send(`Repository: ${handler.repo}`,"Deploy failed! " + error)
+						slack.send(`Repository: ${handler.repo}`,"Deploy failed! " + error, handler)
 							.then((res) =>
 							{
 								log.debug(
@@ -120,7 +120,7 @@ _.forEach(config.handlers, (handler) =>
 					log.info("stdout: ", stdout);
 					if (slacker == true)
 					{
-						slack.send(`Repository: ${handler.repo}`, `Deploy to branch, ${handler.branch}, successful!`)
+						slack.send(`Repository: ${handler.repo}`, `Deploy to branch, ${handler.branch}, successful!`, handler)
 							.then((res) =>
 							{
 								log.debug(
