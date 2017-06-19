@@ -48,17 +48,18 @@ const loggerBridge = {
 	https: Options to pass to nodejs https server. If specified, you must follow documentation about nodejs https library (See options in https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener)
 	trustProxy: By default the x-forwarded-for header is trusted when determining the remoteAddress to log for a request. Set this to false to disable this behavior
 */
-const github = githubhook(
-{
-	port: config.port,
-	secret: config.secret,
-	path: config.path,
-	logger: loggerBridge,
-	https:
-	{
-		key: fs.readFileSync(config.sslKey),
-		cert: fs.readFileSync(config.sslCert)
-	}
-});
+//const github = githubhook(
+//{
+//	port: config.port,
+//	secret: config.secret,
+//	path: config.path,
+//	logger: loggerBridge,
+//	https:
+//	{
+//		key: fs.readFileSync(config.sslKey),
+//		cert: fs.readFileSync(config.sslCert)
+//	}
+//});
+//
 
-
+require('./server');

@@ -2,7 +2,7 @@ const http = require('http');
 const https = require('https');
 
 const express = require('express');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -13,12 +13,12 @@ app.post("/travis/notifications", travis);
 
 let port = 8000;
 
-if (process.env.PORT)
-{
+//if (process.env.PORT)
+//{
 	http.createServer(app).listen(port, () => {
 		console.log("Server started on http://localhost:" + port);
 	});
-}
+//}
 //else
 //{
 //	https.createServer({
