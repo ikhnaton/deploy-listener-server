@@ -1,7 +1,7 @@
 
 branches:
   only:
-  - master
+  - niall
 
 notifications:
   webhooks: http://9.80.98.169/travis/notifications
