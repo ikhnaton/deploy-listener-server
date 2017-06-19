@@ -1,0 +1,7 @@
+
+branches:
+  only:
+  - master
+
+notifications:
+  webhooks: http://9.80.98.169/travis/notifications
