@@ -288,4 +288,11 @@ let req =
 	}
 };
 
-GitHub.notify(req,null, function() {});
+let res = {
+	sendStatus: function(value)
+	{
+
+	}
+};
+
+GitHub.notify(req, res, function() {});

@@ -6,10 +6,10 @@ global.log = bunyan.createLogger(
 	name: "deploy-listener",
 	level: config.logLevel,
 	streams: [
-		{
-			type: 'stream',
-			stream: process.stdout
-        },
+//		{
+//			type: 'stream',
+//			stream: process.stdout
+//        },
 		{
 			type: 'rotating-file',
 			path: config.logFile,
