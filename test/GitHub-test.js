@@ -12,13 +12,11 @@ global.log = bunyan.createLogger(
 			stream: process.stdout
         }
 	]
-	//serializers: { message: require('./messageSerializer') }
 });
 
 
 GitHub.on('push', (event, data) =>
 {
-
 		log.info({
 			data: {
 				event: event,
@@ -27,22 +25,6 @@ GitHub.on('push', (event, data) =>
 			}
 		});
 });
-//
-//
-//GitHub.on('goodbye', (event) =>
-//{
-//	console.log(event);
-//});
-//
-//
-//GitHub.on('whatup', (event) =>
-//{
-//	console.log(event);
-//});
-//
-//GitHub.test("hello");
-//GitHub.test("see ya");
-//GitHub.test("whatup");
 
 let req =
 {
