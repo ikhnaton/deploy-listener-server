@@ -32,5 +32,5 @@ const loggerBridge = {
 	}
 }
 
-//start the server
+//start the server up
 require('./lib/server');
