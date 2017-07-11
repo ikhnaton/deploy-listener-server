@@ -3,25 +3,28 @@
   "version": "0.0.1",
   "description": "Start an SSL listener for GitHub to listen for pushes to branches then launch an executable.",
   "main": "index.js",
-  "scripts":
-  {
-  	"test": "node test/dummyTest.js"
+  "scripts": {
+    "test": "node test/dummyTest.js"
   },
   "author": "Niall Cargill <ikhnaton@us.ibm.com>",
   "license": "MIT",
   "repository": {
-  	"type": "git",
-  	"url": "https://github.ibm.com/ikhnaton/deploy-listener-server.git"
+    "type": "git",
+    "url": "https://github.ibm.com/ikhnaton/deploy-listener-server.git"
   },
-  "dependencies":
-  {
-  	"@slack/client": "^3.10.0",
-  	"body-parser": "^1.17.2",
-  	"bunyan": "^1.8.10",
-  	"express": "^4.15.3",
-  	"lodash": "^4.17.4"
+  "dependencies": {
+    "@slack/client": "^3.10.0",
+    "body-parser": "^1.17.2",
+    "bunyan": "^1.8.10",
+    "configuration-master": "0.0.2",
+    "express": "^4.15.3",
+    "lodash": "^4.17.4"
   },
   "keywords": [
-  	"webhooks", "github", "server", "listener", "deploy"
+    "webhooks",
+    "github",
+    "server",
+    "listener",
+    "deploy"
   ]
 }
