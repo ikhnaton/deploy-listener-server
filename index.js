@@ -1,18 +1,20 @@
+const path = require('path');
 const bunyan = require('bunyan');
-const config = require('./config');
+const config = require('configuration-master');
+config.loadConfig(path.join(__dirname, '/config'));
 
 global.log = bunyan.createLogger(
 {
 	name: "deploy-listener",
-	level: config.logLevel,
+	level: config.direct.__COMMON.logLevel,
 	streams: [
-//		{
-//			type: 'stream',
-//			stream: process.stdout
-//        },
+		{
+			type: 'stream',
+			stream: process.stdout
+        },
 		{
 			type: 'rotating-file',
-			path: config.logFile,
+			path: config.direct.__COMMON.logFile,
 			period: '1d',
 			count: 3
 		}
