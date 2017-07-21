@@ -1,7 +1,25 @@
 const path = require('path');
 const bunyan = require('bunyan');
 const config = require('configuration-master');
-config.loadConfig(path.join(__dirname, '/config'));
+
+let basePath = process.argv[1];
+let cfgFile = process.argv[2];
+
+if (cfgFile != null)
+{
+	if (cfgFile.substring(0,1) == "/")
+	{
+		config.loadConfig(cfgFile);
+	}
+	else
+	{
+		config.loadConfig(path.join(basePath,cfgFile));
+	}
+}
+else
+{
+	config.loadConfig(path.join(__dirname, '/config'));
+}
 
 global.log = bunyan.createLogger(
 {
