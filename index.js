@@ -2,7 +2,7 @@ const path = require('path');
 const bunyan = require('bunyan');
 const config = require('configuration-master');
 
-let basePath = process.argv[1];
+let basePath = (process.argv[1].indexOf("node_modules") > -1)?process.argv[1].substring(0,process.argv[1].indexOf("node_modules")):process.argv[1];
 let cfgFile = process.argv[2];
 
 if (cfgFile != null)
