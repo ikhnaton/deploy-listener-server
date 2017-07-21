@@ -1,6 +1,6 @@
 {
   "name": "@ibm/deploy-listener-server",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Start an SSL listener for GitHub to listen for pushes to branches then launch an executable.",
   "main": "index.js",
   "scripts": {
