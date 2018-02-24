@@ -5,7 +5,7 @@ This is an attempt to simplify the process of dealing with Github webhooks.  Thr
 ### Configuration
 To use this application clone this repo or install via npm
 
-```npm install @ibm/deploy-listener-server```
+```npm install deploy-listener-server```
 
 
 ```
