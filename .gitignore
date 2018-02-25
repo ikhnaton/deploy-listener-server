@@ -7,3 +7,4 @@
 /certificates/cert.pem
 /config.json
 /test-slack.js
+/package-lock.json

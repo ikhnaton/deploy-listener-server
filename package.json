@@ -1,6 +1,6 @@
 {
   "name": "deploy-listener-server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Start an SSL listener for GitHub to listen for pushes to branches then launch an executable.",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "@slack/client": "^3.10.0",
     "body-parser": "^1.17.2",
     "bunyan": "^1.8.10",
-    "configuration-master": "0.0.2",
+    "configuration-master": "0.0.3",
     "express": "^4.15.3",
     "lodash": "^4.17.4"
   },
